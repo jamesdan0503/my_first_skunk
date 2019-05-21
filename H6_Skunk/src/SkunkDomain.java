@@ -62,7 +62,8 @@ public class SkunkDomain
 				skunkDice.roll();
 				if (skunkDice.getLastRoll() == 2)
 				{
-					handleSkunk();
+					handleSkunk("Two Skunks! You lose the turn, the round score, plus pay 4 chips to the kitty", 
+							4, 0);
 					wantsToRoll = false;
 					break;
 				}
@@ -225,7 +226,7 @@ public class SkunkDomain
 		return true;
 	}
 
-	private void handleSkunk(String msg, int kittyPenalty, int newRoundScore))
+	private void handleSkunk(String msg, int kittyPenalty, int newRoundScore)
 	{
 		ui.println(msg);
 		kitty += kittyPenalty;

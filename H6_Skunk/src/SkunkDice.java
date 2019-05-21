@@ -8,8 +8,7 @@ public class SkunkDice extends Dice
 
 	public boolean isDoubleSkunk()
 	{
-		
-		return getLastRoll();
+		return getDie1().getLastRoll() == 1 && getDie2().getLastRoll() == 1;
 	}
 	
 	
