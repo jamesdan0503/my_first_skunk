@@ -33,7 +33,7 @@ public class SkunkDomain
 
 	public boolean run()
 	{
-		ui.println("Welcome to Skunk 0.47\n");
+		ui.println("Welcome to Skunk 0.47 Refactor Edition\n");
 
 		String numberPlayersString = skunkUI.promptReadAndReturn("How many players?");
 		this.numberOfPlayers = Integer.parseInt(numberPlayersString);
