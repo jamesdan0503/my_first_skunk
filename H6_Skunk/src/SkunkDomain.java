@@ -17,7 +17,7 @@ public class SkunkDomain
 	public boolean wantsToQuit;
 	public boolean oneMoreRoll;
 
-	public Dice skunkDice;
+	public SkunkDice skunkDice;
 
 	public SkunkDomain(SkunkUI ui)
 	{
@@ -26,7 +26,7 @@ public class SkunkDomain
 
 		this.playerNames = new String[20];
 		this.players = new ArrayList<Player>();
-		this.skunkDice = new Dice();
+		this.skunkDice = new SkunkDice();
 		this.wantsToQuit = false;
 		this.oneMoreRoll = false;
 	}
@@ -60,14 +60,14 @@ public class SkunkDomain
 			{
 				activePlayer.setRollScore(0);
 				skunkDice.roll();
-				if (skunkDice.getLastRoll() == 2)
+				if (skunkDice.isDoubleSkunk())
 				{
 					handleSkunk("Two Skunks! You lose the turn, the round score, plus pay 4 chips to the kitty", 
 							4, 0);
 					wantsToRoll = false;
 					break;
 				}
-				else if (skunkDice.getLastRoll() == 3)
+				else if (skunkDice.isDeuce())
 				{
 					ui.println("Skunks and Deuce! You lose the turn, the turn score, plus pay 2 chips to the kitty");
 					kitty += 2;
@@ -76,7 +76,7 @@ public class SkunkDomain
 					wantsToRoll = false;
 					break;
 				}
-				else if (skunkDice.getDie1().getLastRoll() == 1 || skunkDice.getDie2().getLastRoll() == 1)
+				else if (skunkDice.isOneSkunk())
 				{
 					ui.println("One Skunk! You lose the turn, the turn score, plus pay 1 chip to the kitty");
 					kitty += 1;
@@ -149,7 +149,7 @@ public class SkunkDomain
 					wantsToRoll = false;
 					break;
 				}
-				else if (skunkDice.getLastRoll() == 3)
+				else if (skunkDice.isDeuce())
 				{
 					handleSkunk("Skunks and Deuce! You lose the turn, the turn score, plus pay 2 chips to the kitty",
 							2,
@@ -158,7 +158,7 @@ public class SkunkDomain
 					wantsToRoll = false;
 
 				}
-				else if (skunkDice.getDie1().getLastRoll() == 1 || skunkDice.getDie2().getLastRoll() == 1)
+				else if (skunkDice.isOneSkunk())
 				{
 					handleSkunk("One Skunk! You lose the turn, the turn core, plus pay 1 chip to the kitty",
 							1,activePlayer.getRoundScore());

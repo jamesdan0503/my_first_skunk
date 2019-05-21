@@ -86,14 +86,6 @@ public class Dice
 
 	public static final int NUM_TRIALS = 360;
 	
-	public boolean isDoubleSkunk() {		
-		return getDie1().getLastRoll() == 1 && getDie2().getLastRoll() == 1;
-	}
-
-	public boolean isOneSkunk() {
-		return getDie1().getLastRoll() == 1 || getDie2().getLastRoll() == 1;
-	}
-
 	public static void main(String[] args)
 	{
 		Dice dice1 = new Dice();
