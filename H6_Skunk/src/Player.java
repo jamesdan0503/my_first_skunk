@@ -22,11 +22,6 @@ public class Player
 		this.numberChips = startingChipsPerPlayer;
 	}
 
-	public static void main(String[] args)
-	{
-		// TODO Auto-generated method stub
-	}
-
 	public void addToRollScore(int lastTotal)
 	{
 		rollScore += lastTotal;
@@ -64,7 +59,6 @@ public class Player
 
 	public String getName()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 
