@@ -62,8 +62,8 @@ public class SkunkDomain
 				skunkDice.roll();
 				if (skunkDice.isDoubleSkunk())
 				{
-					handleSkunk("Two Skunks! You lose the turn, the round score, plus pay 4 chips to the kitty", 
-							4, 0);
+					ui.println("Two Skunks! You lose the turn, the round score, plus pay 4 chips to the kitty");
+					rollScore(activePlayer,4);
 					wantsToRoll = false;
 					break;
 				}
@@ -71,20 +71,16 @@ public class SkunkDomain
 				{
 					ui.println("Skunks and Deuce! You lose the turn, the turn score, plus pay 2 chips to the kitty");
 					kitty += 2;
-					activePlayer.setNumberChips(activePlayer.getNumberChips() - 2);
-					activePlayer.setTurnScore(0);
+					rollScore(activePlayer,2);
 					wantsToRoll = false;
 					break;
 				}
 				else if (skunkDice.isOneSkunk())
 				{
 					ui.println("One Skunk! You lose the turn, the turn score, plus pay 1 chip to the kitty");
-					kitty += 1;
-					activePlayer.setNumberChips(activePlayer.getNumberChips() - 1);
-					activePlayer.setTurnScore(0);
+					rollScore(activePlayer,1);
 					wantsToRoll = false;
 					break;
-
 				}
 
 				activePlayer.setRollScore(skunkDice.getLastRoll());
@@ -144,24 +140,19 @@ public class SkunkDomain
 
 				if (skunkDice.isDoubleSkunk())
 				{
-					handleSkunk("Two Skunks! You lose the turn, the round score, plus pay 4 chips to the kitty", 
-							4, 0);
+					rollScore(activePlayer,4);
 					wantsToRoll = false;
 					break;
 				}
 				else if (skunkDice.isDeuce())
 				{
-					handleSkunk("Skunks and Deuce! You lose the turn, the turn score, plus pay 2 chips to the kitty",
-							2,
-							activePlayer.getRoundScore());
-					
+					rollScore(activePlayer,2);
 					wantsToRoll = false;
 
 				}
 				else if (skunkDice.isOneSkunk())
 				{
-					handleSkunk("One Skunk! You lose the turn, the turn core, plus pay 1 chip to the kitty",
-							1,activePlayer.getRoundScore());
+					rollScore(activePlayer,1);
 					wantsToRoll = false;
 				}
 				else
@@ -226,19 +217,16 @@ public class SkunkDomain
 		return true;
 	}
 
-	private void handleSkunk(String msg, int kittyPenalty, int newRoundScore)
+	public void rollScore(Player activePlayer, int chipsPenalty)
 	{
-		ui.println(msg);
-		kitty += kittyPenalty;
-		activePlayer.setNumberChips(activePlayer.getNumberChips() - kittyPenalty);
+		kitty = kitty + chipsPenalty;
+		int updatedChips=activePlayer.getNumberChips()-chipsPenalty;
+		activePlayer.setNumberChips(updatedChips);
 		activePlayer.setTurnScore(0);
-		activePlayer.setRoundScore(newRoundScore);
-	}
-
-	public static void main(String[] args)
-	{
-		// TODO Auto-generated method stub
-
+		if(chipsPenalty == 4)
+		{
+			activePlayer.setRoundScore(0);
+		}
 	}
 
 }
